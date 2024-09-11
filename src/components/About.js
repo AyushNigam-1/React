@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext , memo } from 'react'
 import noteContext from '../context/notes/noteContext'
 
-const About = () => {
+const About = ({count}) => {
+  console.log("About Rerendering")
     const a  = useContext(noteContext)
     console.log("a",a.name)
   return (
@@ -11,4 +12,4 @@ const About = () => {
   )
 }
 
-export default About
+export default memo(About)

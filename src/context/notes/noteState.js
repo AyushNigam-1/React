@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-    const state = {
-        "name":"Harry",
-        "class":"5th"
-    }
+    const state = useMemo(() => ({ name:"Harry", class:"5th"}),[]) 
 return (
     <NoteContext.Provider value={state}>
         {props.children}
