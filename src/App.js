@@ -1,16 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { fetchFacts } from './redux/counter/countersSlice';
 import NoteState from './context/notes/noteState';
 import About from './components/About';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './counterSlice'
-const count = useSelector((state) => state.counter.value)
-const dispatch = useDispatch()
+import { increment, decrement } from './redux/counter/countersSlice';
 function App() {
+  const state = useSelector((state) => state)
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(1)
   const reduxCount = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
+  const count3 = useSelector((state) => state. counter.value)
+  
+if(state.counter.isLoading){
+  return <h1>Loading...</h1>
+}
 
   return (
     <>
@@ -33,6 +39,10 @@ function App() {
         >
           Decrement
         </button>
+        <button onClick={() => dispatch(fetchFacts())} > fetch </button>
+        {state.counter.data &&
+          state.counter.data.map((fact) => <div>{fact.text} </div>)
+        }
       </NoteState>
     </>
   );
