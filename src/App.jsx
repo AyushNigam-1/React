@@ -9,6 +9,7 @@ import { increment, decrement } from './redux/counter/countersSlice';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Service from './components/Service';
 import Layout from './layout/Layout';
+import ErrorPage from './ErrorPage';
 function App() {
   const state = useSelector((state) => state)
   const [count, setCount] = useState(0)
@@ -19,9 +20,10 @@ function App() {
   if (state.counter.isLoading) {
     return <h1>Loading...</h1>
   }
-  const router = createBrowserRouter({
+  const router = createBrowserRouter([{
     path: "/",
     element: <Layout />,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: '/service',
@@ -32,7 +34,7 @@ function App() {
         element: <About />
       }
     ]
-  })
+  }])
   return <RouterProvider router={router} />
   {/* <NoteState>
         <div className="App">
